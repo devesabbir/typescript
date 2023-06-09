@@ -1,5 +1,4 @@
-// Installation Typescript 
-// npm i -g typescript
-// for version check in typescript
-// tsc -v 
-// tsc init for initialization typescript
+// npm i -g typescript for Install Typescript 
+// tsc -v for version check in typescript
+// tsc --init for initialization typescript
+// tsc -w for watchging typescript
