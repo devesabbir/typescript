@@ -152,18 +152,51 @@ function initializeApp() {
  * @Omit types is used to create a type by omitting a set of properties K from type T
  */
 
-interface User {
-  id: number;
-  name: string;
-  email: string;
-  age: number;
+// interface User {
+//   id: number;
+//   name: string;
+//   email: string;
+//   age: number;
+// }
+
+// type UserWithoutEmailAge = Omit<User, "email" | "age">;
+
+// const userWithoutEmailandAge: UserWithoutEmailAge = {
+//   id: 1,
+//   name: "John Doe",
+// };
+
+// console.log(userWithoutEmailandAge);
+
+enum Status {
+  Pending = "PENDING",
+  InProgress = "IN_PROGRESS",
+  Completed = "COMPLETED",
 }
 
-type UserWithoutEmailAge = Omit<User, "email" | "age">;
+interface Task<T> {
+  id: number;
+  title: string;
+  description: string;
+  status: T;
+}
 
-const userWithoutEmailandAge: UserWithoutEmailAge = {
+function createTask<T>(obj: Task<T>): Task<T> {
+  return {
+    id: obj.id ?? Date.now(),
+    title: obj.title ?? "New Task",
+    description: obj.description ?? "",
+    status: obj.status,
+  };
+}
+
+const newTask = createTask<Status>({
   id: 1,
-  name: "John Doe",
-};
+  title: "Learn TypeScript Utility Types",
+  description: "Understand and implement various TypeScript utility types.",
+  status: Status.InProgress,
+});
 
-console.log(userWithoutEmailandAge);
+console.log({
+  task: newTask,
+});
