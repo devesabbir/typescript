@@ -1,4 +1,22 @@
-// TypeScript code demonstrating the use of optional and required properties in interfaces
+import { CodeGenerator } from "./utils/index.js";
+
+document.addEventListener("DOMContentLoaded", function (e) {
+  initializeApp();
+});
+
+function initializeApp() {
+  const title = CodeGenerator.CreateElement({
+    tagName: "h1",
+    className: "title",
+    textContent: "TypeScript Utility Types Example Check the console",
+  });
+
+  CodeGenerator.apendToBody(title);
+}
+
+/**
+ * @required types is opposite of @partial types
+ */
 // interface User {
 //   id: number;
 //   name: string;
@@ -34,31 +52,118 @@
 //   admin: admin,
 // });
 
-// partial types is opposite of required types
+/**
+ * @partial types is opposite of @required types
+ */
+
+// interface User {
+//   id: number;
+//   name: string;
+//   email: string;
+// }
+
+// function updateUser(obj: User, updatedUser: Partial<User>): User {
+//   return {
+//     ...obj,
+//     ...updatedUser,
+//   };
+// }
+
+// const user: User = {
+//   id: 1,
+//   name: "John Doe",
+//   email: "user@email.com",
+// };
+
+// const upUser = updateUser(user, {
+//   email: "newemail@gmail.com",
+// });
+
+// console.log({
+//   oldUser: user,
+//   updatedUser: upUser,
+// });
+
+/**
+ * @readonly types makes all properties readonly
+ */
+
+// type User = {
+//   id: number;
+//   name: string;
+//   email: string;
+// };
+// const user: Readonly<User> = {
+//   id: 1,
+//   name: "John Doe",
+//   email: "user@gmail.com",
+// };
+
+// user.name = "New Name";
+// Error: Cannot assign to 'name' because it is a read-only property.
+
+/**
+ * @Record types is used to create a type with a set of properties K of type T
+ */
+
+// type Role = "admin" | "user" | "guest";
+// type User = {
+//   id: number;
+//   name: string;
+// };
+
+// type Users = Record<Role, User[]>;
+
+// const users: Users = {
+//   admin: [
+//     {
+//       id: 1,
+//       name: "Admin User",
+//     },
+//   ],
+//   user: [],
+//   guest: [],
+// };
+
+// users.admin.forEach((user) => {
+//   console.log(`Admin: ${user.name}`);
+// });
+
+/**
+ * @Pick types is used to create a type by picking a set of properties K from type T
+ */
+
+// interface User {
+//   id: number;
+//   name: string;
+//   email: string;
+//   age: number;
+// }
+
+// type UserPreview = Pick<User, "id" | "name" | "email">;
+
+// const userPreview: UserPreview = {
+//   id: 1,
+//   name: "John Doe",
+//   email: "user@email.com",
+// };
+
+/**
+ * @Omit types is used to create a type by omitting a set of properties K from type T
+ */
+
 interface User {
   id: number;
   name: string;
   email: string;
+  age: number;
 }
 
-function updateUser(obj: User, updatedUser: Partial<User>): User {
-  return {
-    ...obj,
-    ...updatedUser,
-  };
-}
+type UserWithoutEmailAge = Omit<User, "email" | "age">;
 
-const user: User = {
+const userWithoutEmailandAge: UserWithoutEmailAge = {
   id: 1,
   name: "John Doe",
-  email: "user@email.com",
 };
 
-const upUser = updateUser(user, {
-  email: "newemail@gmail.com",
-});
-
-console.log({
-  oldUser: user,
-  updatedUser: upUser,
-});
+console.log(userWithoutEmailandAge);
