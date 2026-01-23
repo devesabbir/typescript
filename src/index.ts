@@ -1,13 +1,35 @@
-import { CodeGenerator } from "./lib/index.js";
+// TypeScript code demonstrating the use of optional and required properties in interfaces
+interface User {
+  id: number;
+  name: string;
+  email?: string;
+}
 
-document.addEventListener("DOMContentLoaded", () => {
-  const card = CodeGenerator.CreateElement("div");
-  const title = CodeGenerator.CreateElement(
-    "h2",
-    "card-title",
-    undefined,
-    "Card Title"
-  );
+function createUser(obj: User): User {
+  return {
+    id: obj.id ?? Date.now(),
+    name: obj.name ?? "Anonymous",
+    email: obj.email ?? "",
+  };
+}
 
-  CodeGenerator.apendToBody(title, card);
+const newUser = createUser({ id: 1, name: "John Doe" });
+
+function createAdminUser(obj: Required<User>): User {
+  return {
+    id: obj.id,
+    name: obj.name,
+    email: obj.email,
+  };
+}
+
+const admin = createAdminUser({
+  id: 2,
+  name: "Admin User",
+  email: "admin@email.com",
+});
+
+console.log({
+  user: newUser,
+  admin: admin,
 });
