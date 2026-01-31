@@ -28,3 +28,5 @@ const person1: Partial<Person> = {
   model: "Camry",
   year: 2020,
 };
+
+console.log(person1);
