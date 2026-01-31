@@ -149,7 +149,8 @@ function initializeApp() {
 // };
 
 /**
- * @Omit types is used to create a type by omitting a set of properties K from type T
+ *
+ * @Omit Object থেকে property বাদ দেয়
  */
 
 // interface User {
@@ -168,35 +169,69 @@ function initializeApp() {
 
 // console.log(userWithoutEmailandAge);
 
-enum Status {
-  Pending = "PENDING",
-  InProgress = "IN_PROGRESS",
-  Completed = "COMPLETED",
-}
+/**
+ * @Generic types allow you to create reusable components
+ */
+// enum Status {
+//   Pending = "PENDING",
+//   InProgress = "IN_PROGRESS",
+//   Completed = "COMPLETED",
+// }
 
-interface Task<T> {
-  id: number;
-  title: string;
-  description: string;
-  status: T;
-}
+// interface Task<T> {
+//   id: number;
+//   title: string;
+//   description: string;
+//   status: T;
+// }
 
-function createTask<T>(obj: Task<T>): Task<T> {
-  return {
-    id: obj.id ?? Date.now(),
-    title: obj.title ?? "New Task",
-    description: obj.description ?? "",
-    status: obj.status,
-  };
-}
+// function createTask<T>(obj: Task<T>): Task<T> {
+//   return {
+//     id: obj.id ?? Date.now(),
+//     title: obj.title ?? "New Task",
+//     description: obj.description ?? "",
+//     status: obj.status,
+//   };
+// }
 
-const newTask = createTask<Status>({
-  id: 1,
-  title: "Learn TypeScript Utility Types",
-  description: "Understand and implement various TypeScript utility types.",
-  status: Status.InProgress,
-});
+// const newTask = createTask<Status>({
+//   id: 1,
+//   title: "Learn TypeScript Utility Types",
+//   description: "Understand and implement various TypeScript utility types.",
+//   status: Status.InProgress,
+// });
 
-console.log({
-  task: newTask,
-});
+// console.log({
+//   task: newTask,
+// });
+
+/**
+ *
+ * @Exclude utility type example
+ * @Exclude	Union type থেকে type বাদ দেয়
+ *
+ */
+
+// type Status = "Running" | "Completed" | "Pending";
+// const status: Exclude<Status, "Running"> = "Completed";
+
+/**
+ *
+ * @NonNullable utility type example
+ */
+
+// type User = {
+//   id: number;
+//   name: string;
+//   email?: string | null;
+// };
+
+// const getUserEmail = (user: User): NonNullable<string> => {
+//   if (user.email == null) {
+//     throw new Error("Email is null or undefined");
+//   }
+//   return user.email;
+
+//   //or
+//   // return user.email!;
+// };

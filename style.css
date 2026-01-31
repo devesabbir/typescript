@@ -13,6 +13,7 @@ body {
   height: 100vh;
   padding: 2rem;
   font-size: 16px;
+  background-color: #222;
 }
 
 .title {
@@ -20,4 +21,5 @@ body {
   font-weight: 400;
   font-size: 1.5em;
   color: orange;
+  text-align: center;
 }
