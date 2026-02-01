@@ -13,3 +13,11 @@ function initializeApp() {
 
   CodeGenerator.apendToBody(title);
 }
+
+type Fruits = string[];
+
+const fruits: Fruits = ["apple", "banana", "orange"];
+
+const sorted = fruits.sort((a, b) => a.localeCompare(b));
+
+console.log(sorted);
